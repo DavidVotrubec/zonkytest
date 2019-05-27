@@ -13,6 +13,7 @@ export class ZonkyDemoCalculatorComponent {
 
   isLoading = false;
   averageAmount = 0;
+  recordsCount = 0;
   currencyValue = '';
 
   // export for consumption in template
@@ -33,6 +34,7 @@ export class ZonkyDemoCalculatorComponent {
 
     this.marketplaceService.load(rating).subscribe(loans => {
       this.averageAmount = average(loans.map(l => l.amount));
+      this.recordsCount = loans.length;
       this.currencyValue = loans.length > 0
         ? loans[0].currency
         : '';
