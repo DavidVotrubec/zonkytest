@@ -8,7 +8,12 @@ Test app for Zonky
 - filter by %
 - calculate average amount
 
-
+## Example request
+https://app.zonky.cz/api/loans/marketplace?rating__in=%5B%22B%22%2C%22C%22%5D.
+See percent encoding  http://en.wikipedia.org/wiki/Percent-encoding
+The `rating_in` is URL encododed, so the value is this rating__in=%5B"B"%2C"C"%5D
+Which can in human language is this: `?rating_in=["B", "C"]`
+But beware that square brackets are reserved for IPv6, so they can't be used in url directly. They need to be encoded.
 
 
 # Zonkyapp

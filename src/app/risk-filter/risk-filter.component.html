@@ -1,0 +1,6 @@
+<div>
+  <button class="btn"
+    [disabled]="disabled"
+    *ngFor="let rating of ratings"
+    (click)="select(rating)">{{rating.percentile}}</button>
+</div>
