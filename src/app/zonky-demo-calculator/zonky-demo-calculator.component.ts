@@ -12,7 +12,7 @@ import { locale } from '../config';
 export class ZonkyDemoCalculatorComponent {
 
   isLoading = false;
-  averageAmount = 0;
+  averageAmount: number = null;
   recordsCount = 0;
   currencyValue = '';
 
@@ -23,6 +23,9 @@ export class ZonkyDemoCalculatorComponent {
     private marketplaceService: MarketplaceService
   ) { }
 
+  get showPlaceholder() {
+    return !this.isLoading && this.averageAmount == null;
+  }
 
   calculateAverageAmount(rating: Rating) {
     // Prevent duplicated requests

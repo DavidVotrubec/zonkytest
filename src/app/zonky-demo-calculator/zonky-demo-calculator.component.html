@@ -1,10 +1,18 @@
 <app-risk-filter [disabled]="isLoading" (changedRisk)="calculateAverageAmount($event)"></app-risk-filter>
 
-<div *ngIf="isLoading">
-  Loading, please wait ...<br/>
-  Data are loaded via proxy, so it takes some time.
+<div class="graybox" *ngIf="!showPlaceholder; else placeholder">
+    <div *ngIf="isLoading">
+      Loading, please wait ...<br/>
+      Data are loaded via proxy, so it takes some time.
+    </div>
+
+    <div *ngIf="averageAmount > 0 && !isLoading">
+      The average amount is {{averageAmount | currency:currencyValue:'symbol':'3.2-2':locale}} based on {{recordsCount}} loans.
+    </div>
 </div>
 
-<div *ngIf="averageAmount > 0 && !isLoading">
-  The average amount is {{averageAmount | currency:currencyValue:'symbol':'3.2-2':locale}} based on {{recordsCount}} loans.
-</div>
+<ng-template #placeholder>
+  <div class="graybox">
+    Results will be displayed here. Just click any button any wait.
+  </div>
+</ng-template>
