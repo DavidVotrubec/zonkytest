@@ -9,7 +9,6 @@ registerLocaleData(localeCzech, 'cs');
 import { AppComponent } from './app.component';
 import { RiskFilterComponent } from './risk-filter/risk-filter.component';
 import { ZonkyDemoCalculatorComponent } from './zonky-demo-calculator/zonky-demo-calculator.component';
-import { MaterialComponentsModule } from './material-components/material-components.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { MaterialComponentsModule } from './material-components/material-compone
   imports: [
     BrowserModule,
     HttpClientModule,
-    MaterialComponentsModule,
   ],
   providers: [{
     provide: LOCALE_ID,

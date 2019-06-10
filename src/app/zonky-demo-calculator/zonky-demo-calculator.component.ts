@@ -24,10 +24,6 @@ export class ZonkyDemoCalculatorComponent {
     private marketplaceService: MarketplaceService
   ) { }
 
-  get showPlaceholder() {
-    return !this.isLoading && this.averageAmount == null;
-  }
-
   calculateAverageAmount(rating: Rating) {
     // Prevent duplicated requests
     if (this.isLoading) {
