@@ -1,25 +1,61 @@
-<mat-toolbar color="primary">
-  <h1>
-    Demo app for zonky
-  </h1>
-</mat-toolbar>
+<div class="top app-header">
+  <div class="ui stackable grid">
+    <div class="row">
+      <div class="eight wide column">
+        <h2 class="ui header">
+          <div class="content">
+            Demo app for Zonky
+            <div class="sub header">By David Votrubec</div>
+          </div>
+        </h2>
+      </div>
 
-<h3>Look ma, no CSS!</h3>
+    </div>
+  </div>
+</div>
 
-<pre>
-Requirements:
-- load loans from marketplace API
-- count average amount
-- display the result
-</pre>
+<div class="info-box">
+    <div class="ui cards">
 
-<h3>Instructions</h3>
-<pre>
-- Click any button to calculate average amount for given rating.
-- I did not find any paging option, so the average is based on last 20 loans.
-- Thus calculated average might be a bit off.
-</pre>
+        <div class="card">
+          <div class="content">
+            <h3 class="header">Requirements</h3>
 
-<app-zonky-demo-calculator>
-</app-zonky-demo-calculator>
+            <div class="description">
+              <ul>
+                <li>Load loans from marketplace API</li>
+                <li>Count average amount</li>
+                <li>Display the result</li>
+                <li>Use unit test</li>
+                <li>Use responsive styling</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+            <div class="content">
+              <h3 class="header">Instructions</h3>
+
+              <div class="description">
+                <ul>
+                  <li>Click any button to calculate average amount for given rating.</li>
+                  <li>Wait for results</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+      </div>
+</div>
+
+
+
+<mat-grid-list [cols]=2 gutterSize="16px" rowHeight="5:1">
+
+
+    <mat-grid-tile [colspan]=2>
+        <app-zonky-demo-calculator></app-zonky-demo-calculator>
+    </mat-grid-tile>
+  </mat-grid-list>
 

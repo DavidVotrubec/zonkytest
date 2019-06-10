@@ -1,0 +1,14 @@
+@import '../variables';
+
+.app-header {
+  background-color: $header-color;
+  padding: 2rem;
+}
+
+.info-box {
+  margin: 2rem;
+
+  .card {
+    width: auto;
+  }
+}
