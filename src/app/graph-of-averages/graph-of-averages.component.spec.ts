@@ -39,4 +39,14 @@ describe('GraphOfAveragesComponent', () => {
 
     expect(spectator.component.calculateAllAverages).toHaveBeenCalled();
   });
+
+  it('should emit event when loading starts', () => {
+    const button = spectator.query('button');
+    spyOn(spectator.component.loadingInProgress, 'emit');
+
+    button.dispatchEvent(new MouseEvent('click'));
+    spectator.detectChanges();
+
+    expect(spectator.component.loadingInProgress.emit).toHaveBeenCalled();
+  })
 });

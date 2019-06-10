@@ -2,7 +2,7 @@
 
 <app-risk-filter [disabled]="isLoading" (changedRisk)="calculateAverageAmount($event)"></app-risk-filter>
 
-<app-graph-of-averages></app-graph-of-averages>
+<app-graph-of-averages (loadingInProgress)="setIsLoading($event)"></app-graph-of-averages>
 
 <div *ngIf="isLoading" class="ui icon message">
   <i class="notched circle loading icon"></i>

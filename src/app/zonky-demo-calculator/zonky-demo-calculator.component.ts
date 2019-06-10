@@ -49,5 +49,9 @@ export class ZonkyDemoCalculatorComponent {
     });
   }
 
-
+  // React to loading event from graph-component
+  setIsLoading(value: boolean) {
+    debugger
+    this.isLoading = value;
+  }
 }

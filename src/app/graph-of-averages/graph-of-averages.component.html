@@ -7,17 +7,6 @@
   [Highcharts]="Highcharts"
   [constructorType]="chartConstructor"
   [options]="chartOptions"
-  style="width: 100%; height: 400px; display: block;"
-></highcharts-chart>
-
-<div *ngIf="isLoading" class="ui icon message">
-    <i class="notched circle loading icon"></i>
-    <div class="content">
-      <div class="header">
-        Loading, please wait ...
-      </div>
-      <p>Data are loaded via proxy, so it takes some time.</p>
-    </div>
-  </div>
+  style="width: 100%; height: 400px; display: block;"></highcharts-chart>
 
 <div *ngIf="errorMessage" class="ui error message">{{errorMessage}}</div>

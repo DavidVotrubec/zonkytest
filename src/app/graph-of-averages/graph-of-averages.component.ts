@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { average } from '../../utils/math';
 import { RatingsService } from '../ratings.service';
@@ -10,11 +10,15 @@ import * as Highcharts from 'highcharts';
   templateUrl: './graph-of-averages.component.html',
   styleUrls: ['./graph-of-averages.component.css']
 })
-export class GraphOfAveragesComponent implements OnInit {
+export class GraphOfAveragesComponent {
 
   isLoading = false;
   errorMessage = '';
   displayGraph = false;
+
+  // Notify parent component
+  @Output()
+  loadingInProgress = new EventEmitter<boolean>();
 
   Highcharts: typeof Highcharts = Highcharts; // required
   chartConstructor = 'chart';
@@ -25,9 +29,6 @@ export class GraphOfAveragesComponent implements OnInit {
     private ratingsService: RatingsService
   ) { }
 
-  ngOnInit() {
-  }
-
   calculateAllAverages() {
     // Prevent duplicated requests
     if (this.isLoading) {
@@ -37,6 +38,7 @@ export class GraphOfAveragesComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
     this.displayGraph = false;
+    this.loadingInProgress.emit(true);
 
     const allRatings = this.ratingsService.getRatings();
 
@@ -55,11 +57,13 @@ export class GraphOfAveragesComponent implements OnInit {
       this.chartOptions = this.getGraphConfig(categories, rawGraphData);
       this.isLoading = false;
       this.displayGraph = true;
+      this.loadingInProgress.emit(false);
     }, err => {
       this.isLoading = false;
       this.errorMessage = 'Loading data for one or more ratings failed. Please try again.';
       console.error(err);
       this.displayGraph = false;
+      this.loadingInProgress.emit(false);
     });
   }
 
