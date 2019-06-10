@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Rating, Colors } from '../models';
+import { Rating } from '../models';
+import { RatingsService } from '../ratings.service';
 
 @Component({
   selector: 'app-risk-filter',
@@ -14,76 +15,18 @@ export class RiskFilterComponent implements OnInit {
   @Output()
   changedRisk = new EventEmitter<Rating>();
 
-  // TODO: This could be coming from some service
-  // Not hard coded here
-  ratings: Array<Rating> = [
-    {
-      title: 'AAAAAA',
-      percentile: 2.99,
-      color: Colors.Red
-    },
-    {
-      title: 'AAAAA',
-      percentile: 3.99,
-      color: Colors.Orange
-    },
-    {
-      title: 'AAAA',
-      percentile: 4.99,
-      color: Colors.Yellow
-    },
-    {
-      title: 'AAA',
-      percentile: 5.99,
-      color: Colors.Olive
-    },
-    {
-      title: 'AAE',
-      percentile: 6.99,
-      color: Colors.Green
-    },
-    {
-      title: 'AA',
-      percentile: 8.49,
-      color: Colors.Teal
-    },
-    {
-      title: 'AE',
-      percentile: 9.49,
-      color: Colors.Blue
-    },
-    {
-      title: 'A',
-      percentile: 10.99,
-      color: Colors.Violet
-    },
-    {
-      title: 'B',
-      percentile: 13.49,
-      color: Colors.Purple
-    },
-    {
-      title: 'C',
-      percentile: 15.49,
-      color: Colors.Pink
-    },
-    {
-      title: 'D',
-      percentile: 19.99,
-      color: Colors.Brown
-    }
-  ];
+  public ratings: Rating[];
 
-  constructor() { }
+  constructor(
+    private ratingsService: RatingsService
+  ) { }
 
   ngOnInit() {
+    this.ratings = this.ratingsService.getRatings();
   }
 
   select(rating: Rating): void {
     this.changedRisk.emit(rating);
   }
 
-  toggleHover(rating: Rating): void {
-    // rating.hover = !rating.hover;
-  }
 }
