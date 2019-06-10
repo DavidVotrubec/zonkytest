@@ -12,6 +12,7 @@ import { locale } from '../config';
 export class ZonkyDemoCalculatorComponent {
 
   isLoading = false;
+  errorMessage = '';
   averageAmount: number = null;
   recordsCount = 0;
   currencyValue = '';
@@ -34,6 +35,7 @@ export class ZonkyDemoCalculatorComponent {
     }
 
     this.isLoading = true;
+    this.errorMessage = '';
 
     this.marketplaceService.load(rating).subscribe(loans => {
       this.averageAmount = average(loans.map(l => l.amount));
@@ -44,7 +46,7 @@ export class ZonkyDemoCalculatorComponent {
 
       this.isLoading = false;
     }, err => {
-      alert('Error loading data from Zonky');
+      this.errorMessage = 'Error loading data from Zonky';
       console.error('Error loading data from Zonky', err);
       this.averageAmount = 0;
       this.isLoading = false;

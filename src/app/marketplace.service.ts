@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Rating, Loan } from './models';
 import { BaseService } from './base.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,9 +21,14 @@ export class MarketplaceService extends BaseService {
     let url = this.composeUrl();
     url += '?rating__in=' + this.encodeRatings([rating]);
 
+    const headers = new HttpHeaders({
+      'X-Page': '0',
+      'X-Size': '50'
+    });
+
     // TODO: I might run into issues with paging
     // In real life I would not write it as this, but choosing the fastest approach
-    return <Observable<Loan[]>>(this.http.get(url));
+    return <Observable<Loan[]>>(this.http.get(url, { headers }));
   }
 
   // Future proof - it can support array of ratings, similar as in the original Zonky app

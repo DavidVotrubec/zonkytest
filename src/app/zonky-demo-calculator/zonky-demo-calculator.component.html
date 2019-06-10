@@ -9,6 +9,8 @@
     <div *ngIf="averageAmount > 0 && !isLoading">
       The average amount is {{averageAmount | currency:currencyValue:'symbol':'3.2-2':locale}} based on {{recordsCount}} loans.
     </div>
+
+    <div *ngIf="errorMessage">{{errorMessage}}</div>
 </div>
 
 <ng-template #placeholder>
