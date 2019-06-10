@@ -9,7 +9,7 @@ import { Rating } from '../models';
 export class RiskFilterComponent implements OnInit {
 
   @Input()
-  disabled = false;
+  public disabled = false;
 
   @Output()
   changedRisk = new EventEmitter<Rating>();

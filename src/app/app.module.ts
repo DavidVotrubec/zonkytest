@@ -14,7 +14,7 @@ import { ZonkyDemoCalculatorComponent } from './zonky-demo-calculator/zonky-demo
   declarations: [
     AppComponent,
     RiskFilterComponent,
-    ZonkyDemoCalculatorComponent
+    ZonkyDemoCalculatorComponent,
   ],
   imports: [
     BrowserModule,
