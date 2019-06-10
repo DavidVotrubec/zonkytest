@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Rating } from '../models';
 import { MarketplaceService } from '../marketplace.service';
 import { average } from '../../utils/math';
-import { locale } from '../config';
+import { environment as env } from '../../environments/environment';
 
 @Component({
   selector: 'app-zonky-demo-calculator',
@@ -18,7 +18,7 @@ export class ZonkyDemoCalculatorComponent {
   currencyValue = '';
 
   // export for consumption in template
-  locale = locale;
+  locale = env.locale;
 
   constructor(
     private marketplaceService: MarketplaceService

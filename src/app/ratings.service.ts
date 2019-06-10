@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Rating, Colors } from './models';
+import { Rating, RatingName, Colors } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -9,57 +9,57 @@ export class RatingsService {
   getRatings(): Array<Rating> {
     return [
       {
-        title: 'AAAAAA',
+        title: RatingName.AAAAAA,
         percentile: 2.99,
         color: Colors.Red
       },
       {
-        title: 'AAAAA',
+        title: RatingName.AAAAA,
         percentile: 3.99,
         color: Colors.Orange
       },
       {
-        title: 'AAAA',
+        title: RatingName.AAAA,
         percentile: 4.99,
         color: Colors.Yellow
       },
       {
-        title: 'AAA',
+        title: RatingName.AAA,
         percentile: 5.99,
         color: Colors.Olive
       },
       {
-        title: 'AAE',
+        title: RatingName.AAE,
         percentile: 6.99,
         color: Colors.Green
       },
       {
-        title: 'AA',
+        title: RatingName.AA,
         percentile: 8.49,
         color: Colors.Teal
       },
       {
-        title: 'AE',
+        title: RatingName.AE,
         percentile: 9.49,
         color: Colors.Blue
       },
       {
-        title: 'A',
+        title: RatingName.A,
         percentile: 10.99,
         color: Colors.Violet
       },
       {
-        title: 'B',
+        title: RatingName.B,
         percentile: 13.49,
         color: Colors.Purple
       },
       {
-        title: 'C',
+        title: RatingName.C,
         percentile: 15.49,
         color: Colors.Pink
       },
       {
-        title: 'D',
+        title: RatingName.D,
         percentile: 19.99,
         color: Colors.Brown
       }

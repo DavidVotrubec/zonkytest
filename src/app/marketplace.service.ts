@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Rating, Loan } from './models';
-import { BaseService } from './base.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MarketplaceService extends BaseService {
+export class MarketplaceService {
 
   apiNamespace = 'loans/marketplace';
 
   constructor(
     public http: HttpClient
   ) {
-    super(http);
   }
 
   load(rating: Rating): Observable<Loan[]> {
@@ -41,5 +40,9 @@ export class MarketplaceService extends BaseService {
   private encodeRatings(ratings: Array<Rating>): string {
     const arrayContent = ratings.map(r => r.title).join(',');
     return encodeURI(`[${arrayContent}]`);
+  }
+
+  private composeUrl(): string {
+    return `${environment.baseApiUrl}/${this.apiNamespace}`;
   }
 }
