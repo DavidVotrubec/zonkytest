@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { average } from '../../utils/math';
 import { RatingsService } from '../ratings.service';
@@ -13,12 +13,17 @@ import * as Highcharts from 'highcharts';
 export class GraphOfAveragesComponent {
 
   isLoading = false;
-  errorMessage = '';
   displayGraph = false;
+
+  @Input()
+  disabled = false;
 
   // Notify parent component
   @Output()
   loadingInProgress = new EventEmitter<boolean>();
+
+  @Output()
+  loadingError = new EventEmitter<string>();
 
   Highcharts: typeof Highcharts = Highcharts; // required
   chartConstructor = 'chart';
@@ -36,7 +41,6 @@ export class GraphOfAveragesComponent {
     }
 
     this.isLoading = true;
-    this.errorMessage = '';
     this.displayGraph = false;
     this.loadingInProgress.emit(true);
 
@@ -60,10 +64,10 @@ export class GraphOfAveragesComponent {
       this.loadingInProgress.emit(false);
     }, err => {
       this.isLoading = false;
-      this.errorMessage = 'Loading data for one or more ratings failed. Please try again.';
       console.error(err);
       this.displayGraph = false;
       this.loadingInProgress.emit(false);
+      this.loadingError.emit('Loading data for one or more ratings failed. Please try again, this is most likely proxy error.');
     });
   }
 

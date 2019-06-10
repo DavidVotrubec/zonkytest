@@ -42,7 +42,7 @@ export class ZonkyDemoCalculatorComponent {
 
       this.isLoading = false;
     }, err => {
-      this.errorMessage = 'Error loading data from Zonky';
+      this.errorMessage = 'Error loading data from Zonky. Please try again, this is most likely proxy error.';
       console.error('Error loading data from Zonky', err);
       this.averageAmount = 0;
       this.isLoading = false;
@@ -51,7 +51,10 @@ export class ZonkyDemoCalculatorComponent {
 
   // React to loading event from graph-component
   setIsLoading(value: boolean) {
-    debugger
     this.isLoading = value;
+  }
+
+  setLoadingError(error: string) {
+    this.errorMessage = error;
   }
 }

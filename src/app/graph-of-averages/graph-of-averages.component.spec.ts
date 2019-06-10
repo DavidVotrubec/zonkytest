@@ -48,5 +48,5 @@ describe('GraphOfAveragesComponent', () => {
     spectator.detectChanges();
 
     expect(spectator.component.loadingInProgress.emit).toHaveBeenCalled();
-  })
+  });
 });
