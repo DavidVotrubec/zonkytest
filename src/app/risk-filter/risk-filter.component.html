@@ -1,6 +1,5 @@
 <div>
-  <button class="ui button {{rating.color}}" [ngClass]="{inverted: rating.hover}"
-    (mouseenter)="toggleHover(rating)" (mouseout)="toggleHover(rating)"
+  <button class="ui button {{rating.color}}"
     [disabled]="disabled"
     [title]="rating.title"
     *ngFor="let rating of ratings"

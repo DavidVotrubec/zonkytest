@@ -3,7 +3,6 @@ import { forkJoin } from 'rxjs';
 import { average } from '../../utils/math';
 import { RatingsService } from '../ratings.service';
 import { MarketplaceService } from '../marketplace.service';
-import { Rating } from '../models';
 import * as Highcharts from 'highcharts';
 
 @Component({
@@ -41,7 +40,6 @@ export class GraphOfAveragesComponent implements OnInit {
 
     const allRatings = this.ratingsService.getRatings();
 
-    // TODO: Refactor to something nicer
     // Fire requests for all the ratings and wait for results to arrive or error
     forkJoin(
       allRatings.map(rating => this.marketplaceService.load(rating))

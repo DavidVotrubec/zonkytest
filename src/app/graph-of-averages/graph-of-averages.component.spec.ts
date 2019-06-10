@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientModule } from '@angular/common/http';
 import { GraphOfAveragesComponent } from './graph-of-averages.component';
 
 describe('GraphOfAveragesComponent', () => {
@@ -8,6 +8,7 @@ describe('GraphOfAveragesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       declarations: [ GraphOfAveragesComponent ]
     })
     .compileComponents();
