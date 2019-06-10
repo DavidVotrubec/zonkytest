@@ -3,7 +3,7 @@
   Bonus! Get graph with all averages
 </button>
 
-<highcharts-chart *ngIf="!isLoading && !errorMessage"
+<highcharts-chart *ngIf="displayGraph"
   [Highcharts]="Highcharts"
   [constructorType]="chartConstructor"
   [options]="chartOptions"

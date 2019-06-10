@@ -2,7 +2,7 @@
 // But for demo-app it is ok
 
 export interface Rating {
-  title: string;
+  title: RatingName;
   percentile: number;
   color: Colors;
 }
@@ -12,10 +12,26 @@ export interface Loan {
   name: string;
   amount: number;
   story: string;
-  currency: string; // most likely enum
-  rating: string; // most likely enum
+  currency: Currency;
+  rating: RatingName;
+}
 
-  hover?: boolean;
+export enum Currency {
+  Czk = 'CZK'
+}
+
+export enum RatingName {
+  AAAAAA = 'AAAAAA',
+  AAAAA = 'AAAAA',
+  AAAA = 'AAAA',
+  AAA = 'AAA',
+  AAE = 'AAE',
+  AA = 'AA',
+  AE = 'AE',
+  A = 'A',
+  B = 'B',
+  C =  'C',
+  D = 'D',
 }
 
 export enum Colors {

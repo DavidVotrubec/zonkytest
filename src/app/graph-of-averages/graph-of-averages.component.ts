@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
 import { average } from '../../utils/math';
 import { RatingsService } from '../ratings.service';
 import { MarketplaceService } from '../marketplace.service';
@@ -16,14 +15,11 @@ export class GraphOfAveragesComponent implements OnInit {
 
   isLoading = false;
   errorMessage = '';
-  graphData: Array<{rating: Rating, avg: number}> = [];
+  displayGraph = false;
 
   Highcharts: typeof Highcharts = Highcharts; // required
-  chartConstructor = 'chart'; // optional string, defaults to 'chart'
+  chartConstructor = 'chart';
   chartOptions: Highcharts.Options = null;
-  updateFlag = false; // optional boolean
-  oneToOneFlag = true; // optional boolean, defaults to false
-  runOutsideAngular = false; // optional boolean, defaults to false
 
   constructor(
     private marketplaceService: MarketplaceService,
@@ -41,12 +37,12 @@ export class GraphOfAveragesComponent implements OnInit {
 
     this.isLoading = true;
     this.errorMessage = '';
+    this.displayGraph = false;
 
     const allRatings = this.ratingsService.getRatings();
 
     // TODO: Refactor to something nicer
-    // Fire requests for all the ratings
-    // and wait for results to arrive or error
+    // Fire requests for all the ratings and wait for results to arrive or error
     forkJoin(
       allRatings.map(rating => this.marketplaceService.load(rating))
     )
@@ -60,10 +56,12 @@ export class GraphOfAveragesComponent implements OnInit {
       const categories = this.ratingsService.getRatings().map(x => x.title);
       this.chartOptions = this.getGraphConfig(categories, rawGraphData);
       this.isLoading = false;
+      this.displayGraph = true;
     }, err => {
       this.isLoading = false;
       this.errorMessage = 'Loading data for one or more ratings failed. Please try again.';
       console.error(err);
+      this.displayGraph = false;
     });
   }
 
