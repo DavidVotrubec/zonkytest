@@ -2,10 +2,7 @@
 
 <app-risk-filter [disabled]="isLoading" (changedRisk)="calculateAverageAmount($event)"></app-risk-filter>
 
-<button class="ui labelled big red button" (click)="calculateAllAverages()" [disabled]="isLoading">
-  <i class="heart icon"></i>
-  Bonus! Get graph with all averages
-</button>
+<app-graph-of-averages></app-graph-of-averages>
 
 <div *ngIf="isLoading" class="ui icon message">
   <i class="notched circle loading icon"></i>
