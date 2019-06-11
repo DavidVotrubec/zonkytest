@@ -1,38 +1,45 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ZonkyDemoCalculatorComponent } from './zonky-demo-calculator.component';
-import { MarketplaceService } from '../marketplace.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Spectator, createTestComponentFactory } from '@netbasal/spectator';
+import { MockComponent } from 'ng-mocks';
 import { HttpClientModule } from '@angular/common/http';
-// import { Component } from '@angular/core';
+import { GraphOfAveragesComponent } from '../graph-of-averages/graph-of-averages.component';
+import { RiskFilterComponent } from '../risk-filter/risk-filter.component';
 
-// @Component({selector: 'app-risk-filter', template: ''})
-// class RiskFilterStubComponent {}
+import { registerLocaleData } from '@angular/common';
+import localeCzech from '@angular/common/locales/cs';
+registerLocaleData(localeCzech, 'cs');
+import { LOCALE_ID } from '@angular/core';
 
 describe('ZonkyDemoCalculatorComponent', () => {
-  let component: ZonkyDemoCalculatorComponent;
-  let fixture: ComponentFixture<ZonkyDemoCalculatorComponent>;
+  let spectator: Spectator<ZonkyDemoCalculatorComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      providers: [MarketplaceService],
-      declarations: [
-        ZonkyDemoCalculatorComponent,
-        // RiskFilterStubComponent
-       ],
-       schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ZonkyDemoCalculatorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  const createComponent = createTestComponentFactory({
+    component: ZonkyDemoCalculatorComponent,
+    imports: [HttpClientModule],
+    providers: [
+      HttpClientModule,
+      { provide: LOCALE_ID, useValue: 'cs'},
+    ],
+    declarations: [
+      MockComponent(GraphOfAveragesComponent),
+      MockComponent(RiskFilterComponent)
+    ]
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  beforeEach(() => {
+    spectator = createComponent();
+  });
+
+  it('should show results when they arrive', () => {
+    let results = spectator.query('.results');
+    expect(results).toBeFalsy();
+
+    spectator.component.averageAmount = 1123465;
+    spectator.component.recordsCount = 20;
+    spectator.component.isLoading = false;
+    spectator.detectChanges();
+
+    results = spectator.query('.results');
+    expect(results).toBeTruthy();
   });
 });

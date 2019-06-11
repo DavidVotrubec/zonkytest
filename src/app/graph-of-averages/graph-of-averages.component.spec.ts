@@ -49,4 +49,11 @@ describe('GraphOfAveragesComponent', () => {
 
     expect(spectator.component.loadingInProgress.emit).toHaveBeenCalled();
   });
+
+  it('should hide graph when component becomes disabled', () => {
+    expect(spectator.component.disabled).toBeFalsy();
+    spectator.setInput('disabled', true);
+    spectator.detectChanges();
+    expect(spectator.component.disabled).toBeTruthy();
+  });
 });

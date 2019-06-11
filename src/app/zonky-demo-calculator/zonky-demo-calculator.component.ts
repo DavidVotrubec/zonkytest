@@ -52,6 +52,11 @@ export class ZonkyDemoCalculatorComponent {
   // React to loading event from graph-component
   setIsLoading(value: boolean) {
     this.isLoading = value;
+
+    // Reset calculated average, so it is not shown
+    if (value === true) {
+      this.averageAmount = 0;
+    }
   }
 
   setLoadingError(error: string) {

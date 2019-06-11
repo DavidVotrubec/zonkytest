@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { average } from '../../utils/math';
 import { RatingsService } from '../ratings.service';
@@ -10,7 +10,7 @@ import * as Highcharts from 'highcharts';
   templateUrl: './graph-of-averages.component.html',
   styleUrls: ['./graph-of-averages.component.css']
 })
-export class GraphOfAveragesComponent {
+export class GraphOfAveragesComponent implements OnChanges {
 
   isLoading = false;
   displayGraph = false;
@@ -33,6 +33,14 @@ export class GraphOfAveragesComponent {
     private marketplaceService: MarketplaceService,
     private ratingsService: RatingsService
   ) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // Hide graph, when property 'disabled' becomes true
+    // It is only set from the outside when user clicks on some 'rating button'
+    if (changes.hasOwnProperty('disabled') && changes['disabled'].currentValue === true) {
+      this.displayGraph = false;
+    }
+  }
 
   calculateAllAverages() {
     // Prevent duplicated requests
