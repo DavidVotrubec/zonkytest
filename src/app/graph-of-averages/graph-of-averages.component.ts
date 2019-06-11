@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { average } from '../../utils/math';
 import { RatingsService } from '../ratings.service';

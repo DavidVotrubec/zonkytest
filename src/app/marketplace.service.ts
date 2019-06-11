@@ -18,17 +18,39 @@ export class MarketplaceService {
 
   load(rating: Rating): Observable<Loan[]> {
     let url = this.composeUrl();
-    url += '?rating__in=' + this.encodeRatings([rating]);
+    url += '?rating__in=' + this.encodeRatings([rating]); // Required for cors.io
+    // url += '?rating__in=' + [rating];
+    // url += `?rating__in=[${rating.title}]`;
 
+    // Unfortunately the custom headers for paging are stripped away by proxy
     const headers = new HttpHeaders({
       'X-Page': '0',
       'X-Size': '50'
     });
 
-    // TODO: I might run into issues with paging
+    // url = encodeURIComponent(url); compatible with https://nl.hideproxy.me/
+
     // In real life I would not write it as this, but choosing the fastest approach
     return <Observable<Loan[]>>(this.http.get(url, { headers }));
   }
+
+  // load(rating: Rating): Observable<Loan[]> {
+  //   let url = environment.apiUrl;
+  //   url += `?rating__in=[${rating.title}]`;
+
+  //   const headers = new HttpHeaders({
+  //     'X-Page': '0',
+  //     'X-Size': '50'
+  //   });
+
+  //   // should be compatible with https://nl.hideproxy.me/
+  //   // url = encodeURIComponent(url);
+  //   url = environment.proxyUrl + url;
+
+  //   // TODO: I might run into issues with paging
+  //   // In real life I would not write it as this, but choosing the fastest approach
+  //   return <Observable<Loan[]>>(this.http.get(url, { headers }));
+  // }
 
   // Future proof - it can support array of ratings, similar as in the original Zonky app
   // Yes, I know it is not required... Just a demo
