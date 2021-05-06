@@ -24,7 +24,7 @@
     "anyproxy": "^4.1.0",
     "core-js": "^2.5.4",
     "expect": "^24.8.0",
-    "highcharts": "^7.1.2",
+    "highcharts": "^9.0.0",
     "highcharts-angular": "^2.4.0",
     "rxjs": "~6.5.2",
     "semantic-ui-icon": "^2.3.3",
